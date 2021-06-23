@@ -1,0 +1,6 @@
+_site
+.gh-pages
+composer.lock
+composer.phar
+phpunit.xml
+vendor/

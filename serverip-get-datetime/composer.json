@@ -1,0 +1,23 @@
+{
+  "name": "sunnydrake/serverip-get-datetime",
+  "description": "Returns current DateTime for server ip. Uses API from http://worldtimeapi.org .",
+  "minimum-stability": "stable",
+  "keywords": [
+    "ip",
+    "datetime",
+    "worldtimeapi"
+  ],
+  "license": "GPL-3.0-or-later",
+  "type": "library",
+  "authors": [
+    {
+      "name": "sunnydrake",
+      "email": "sunnydrake7@gmail.com"
+    }
+  ],
+  "require": {
+  },
+  "require-dev": {
+    "phpunit/phpunit": "3.7.*"
+  }
+}
