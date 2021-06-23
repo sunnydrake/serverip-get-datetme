@@ -1,7 +1,6 @@
 {
   "name": "sunnydrake/serverip-get-datetime",
   "description": "Returns current DateTime for server ip. Uses API from http://worldtimeapi.org .",
-  "minimum-stability": "stable",
   "keywords": [
     "ip",
     "datetime",
