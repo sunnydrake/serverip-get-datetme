@@ -11,7 +11,7 @@
  * License: GPL3 or later
  */
 declare(strict_types=1);
-require __DIR__."/bootstrap.php";
+require __DIR__ . "/bootstrap.php";
 use PHPUnit\Framework\TestCase;
 
 class ServerGetDateTimeGetGoogle8888ipTimeTest extends TestCase
