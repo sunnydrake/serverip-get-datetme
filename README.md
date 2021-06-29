@@ -54,7 +54,7 @@ Gets DateTime for current IP :
 <?php
 
 require 'vendor/autoload.php';
-var_dump (ServerGetDateTime::getDateTime());
+var_dump (\Sunnydrake\Serverip\ServerGetDateTime::getDateTime());
 ```
 
 ## Copyright and License ##
