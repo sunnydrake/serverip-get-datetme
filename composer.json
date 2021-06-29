@@ -1,22 +1,21 @@
 {
-  "name": "sunnydrake/serverip-get-datetime",
-  "description": "Returns current DateTime for server ip. Uses API from http://worldtimeapi.org .",
-  "keywords": [
-    "ip",
-    "datetime",
-    "worldtimeapi"
-  ],
-  "license": "GPL-3.0-or-later",
-  "type": "library",
-  "authors": [
-    {
-      "name": "sunnydrake",
-      "email": "sunnydrake7@gmail.com"
-    }
-  ],
-  "require": {
-  },
-  "require-dev": {
-    "phpunit/phpunit": "8.5.*"
-  }
+    "name": "sunnydrake/serverip-get-datetime",
+    "description": "Returns current DateTime for server ip. Uses API from http://worldtimeapi.org .",
+    "type": "library",
+    "require-dev": {
+        "phpunit/phpunit": "8.5.*"
+    },
+    "license": "GPL 3.0 or later",
+    "autoload": {
+        "psr-4": {
+            "Sunnydrake\\Serverip\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Oleh Marychev",
+            "email": "sunnydrake7@gmail.com"
+        }
+    ],
+    "require": {}
 }

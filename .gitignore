@@ -4,3 +4,5 @@ composer.lock
 composer.phar
 phpunit.xml
 vendor/
+test/test.php
+test/
