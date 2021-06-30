@@ -13,6 +13,8 @@
 declare(strict_types=1);
 require __DIR__ . "/bootstrap.php";
 use PHPUnit\Framework\TestCase;
+use Sunnydrake\Serverip\ServerGetDateTime;
+
 
 class ServerGetDateTimeGetGoogle8888ipTimeTest extends TestCase
 {

@@ -2,7 +2,9 @@ _site
 .gh-pages
 composer.lock
 composer.phar
+.phar
 phpunit.xml
 vendor/
+build/
 test/test.php
 test/
