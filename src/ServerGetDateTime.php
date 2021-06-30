@@ -62,7 +62,7 @@ class ServerGetDateTime extends ServerGetDateTimeStatusCodes
      * Url of API DateTime by ip API
      * @var string
      */
-    public static string $api_url = "http://worldtimeapi.org/api/ip";
+    public static  $api_url = "http://worldtimeapi.org/api/ip";
     /**
      * Connection Timeout
      * @var int
@@ -72,20 +72,20 @@ class ServerGetDateTime extends ServerGetDateTimeStatusCodes
      * Fetch data Timeout
      * @var int
      */
-    public static int $fetch_timeout = 5;
+    public static  $fetch_timeout = 5;
 
     /**
      * Format that expected in reply from web api
      * @var string
      */
-    public static string $date_time_format = "Y-m-d\TH:i:s.uP";//2021-06-23T16:02:58.691881+03:00
+    public static  $date_time_format = "Y-m-d\TH:i:s.uP";//2021-06-23T16:02:58.691881+03:00
 
     /**
      * Main function to get DateTime
      * @param string $ip (optional)
      * @return array [ genereral status, DateTime or extended status ]
      */
-    static function getDateTime(string $ip = ''): array
+    static function getDateTime( $ip = '')
     {
         //sanity check
         if (!ini_get("allow_url_fopen")) return [self::FAIL, self::ERROR_PHPCONFIG_ALLOW_URL_FOPEN];
@@ -113,6 +113,9 @@ class ServerGetDateTime extends ServerGetDateTimeStatusCodes
             $dti = DateTime::createFromFormat(self::$date_time_format, $dt->datetime);
             if ($dti === FALSE) return [self::FAIL, self::ERROR_DATETIMEPARSE];
             return [self::OK, $dti];
+        } catch (Throwable $e) { // something is really uncommon
+            ini_set('default_socket_timeout', $old);
+            return [self::FAIL, self::ERROR_UNKNOWN];
         } catch (Exception $e) { // something is really uncommon
             ini_set('default_socket_timeout', $old);
             return [self::FAIL, self::ERROR_UNKNOWN];
