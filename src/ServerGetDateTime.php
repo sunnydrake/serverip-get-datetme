@@ -4,7 +4,9 @@
  * Email: sunnydrake7@gmail.com
  * License: GPL3 or later
  */
+
 namespace Sunnydrake\Serverip;
+
 use DateTime;
 use Exception;
 
@@ -84,34 +86,36 @@ class ServerGetDateTime extends ServerGetDateTimeStatusCodes
      * @return array [ genereral status, DateTime or extended status ]
      */
     static function getDateTime(string $ip = ''): array
-    {   try {
+    {
         //sanity check
         if (!ini_get("allow_url_fopen")) return [self::FAIL, self::ERROR_PHPCONFIG_ALLOW_URL_FOPEN];
         //get service with timeout
         $old = ini_set('default_socket_timeout', self::$connect_timeout);
-        if (!empty($ip)) {
-            $ip = "/" . $ip;
-        }
-        $file = fopen(self::$api_url.$ip, 'r');
-        if ($file === FALSE) return [self::FAIL, self::ERROR_CONNECT];
-        ini_set('default_socket_timeout', $old);
-        stream_set_timeout($file, self::$fetch_timeout);
-        stream_set_blocking($file, 0);
-        $contents = '';
-        while (!feof($file)) {
-            $contents .= fread($file, 8192);
-        }
-        $info = stream_get_meta_data($file);
-        if ($info['timed_out']) return [self::FAIL, self::ERROR_TIMEOUT];
-        fclose($file);
-        $dt = json_decode($contents);
-        if (empty($dt)) return [self::FAIL, self::ERROR_JSON_DECODE];
-        if (empty($dt->datetime)) return [self::FAIL, self::ERROR_JSON_DECODE];
-        $dti = DateTime::createFromFormat(self::$date_time_format, $dt->datetime);
-        if ($dti === FALSE) return [self::FAIL, self::ERROR_DATETIMEPARSE];
-        return [self::OK, $dti];
+        try {
+            if (!empty($ip)) {
+                $ip = "/" . $ip;
+            }
+            $file = fopen(self::$api_url . $ip, 'r');
+            ini_set('default_socket_timeout', $old);
+            if ($file === FALSE) return [self::FAIL, self::ERROR_CONNECT];
+            stream_set_timeout($file, self::$fetch_timeout);
+            stream_set_blocking($file, 0);
+            $contents = '';
+            while (!feof($file)) {
+                $contents .= fread($file, 8192);
+            }
+            $info = stream_get_meta_data($file);
+            if ($info['timed_out']) return [self::FAIL, self::ERROR_TIMEOUT];
+            fclose($file);
+            $dt = json_decode($contents);
+            if (empty($dt)) return [self::FAIL, self::ERROR_JSON_DECODE];
+            if (empty($dt->datetime)) return [self::FAIL, self::ERROR_JSON_DECODE];
+            $dti = DateTime::createFromFormat(self::$date_time_format, $dt->datetime);
+            if ($dti === FALSE) return [self::FAIL, self::ERROR_DATETIMEPARSE];
+            return [self::OK, $dti];
         } catch (Exception $e) { // something is really uncommon
-            return [self::FAIL,self::ERROR_UNKNOWN];
+            ini_set('default_socket_timeout', $old);
+            return [self::FAIL, self::ERROR_UNKNOWN];
         }
     }
 }
